@@ -205,7 +205,21 @@ function Invoke-ModelDownloader {
                     Size = "164 MB"
                     Destination = "loras"
                     FileName = "F_1D_Migration_Lora_cloth_(cloth-on).safetensors"
-                }                
+                },
+                [PSCustomObject]@{
+                    Name = "4x-Ultrasharp"
+                    URL = "https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth"
+                    Size = "67 MB"
+                    Destination = "upscale_models"
+                    FileName = "4x-Ultrasharp.pth"
+                },   
+                 [PSCustomObject]@{
+                    Name = "ae.sft"
+                    URL = "https://huggingface.co/Madespace/vae/resolve/3b34e1aca3511e7f382ff8bb2dab0731c4f4b6cf/ae.sft"
+                    Size = "335 MB"
+                    Destination = "vae"
+                    FileName = "ae.sft"
+                },                                     
                 # Add other models for this workflow here in the future
             )
         }
