@@ -213,13 +213,13 @@ function Invoke-ModelDownloader {
                     Destination = "upscale_models"
                     FileName = "4x-Ultrasharp.pth"
                 },   
-                 [PSCustomObject]@{
+                [PSCustomObject]@{
                     Name = "ae.sft"
                     URL = "https://huggingface.co/Madespace/vae/resolve/3b34e1aca3511e7f382ff8bb2dab0731c4f4b6cf/ae.sft"
                     Size = "335 MB"
                     Destination = "vae"
                     FileName = "ae.sft"
-                },                                     
+                }                                     
                 # Add other models for this workflow here in the future
             )
         }
