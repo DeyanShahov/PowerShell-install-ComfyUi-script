@@ -18,6 +18,24 @@ function Get-NextFreeComfyFolder {
     return $fullPath
 }
 
+# Функция за получаване на номер на инстанция
+function Get-InstanceNumber {
+    $choice = Read-Host "Автоматично засичане на номера на инстанцията? (Y/N)"
+    if ($choice -eq 'Y' -or $choice -eq 'y') {
+        return Get-NextFreeComfyFolder
+    }
+    else {
+        $instanceNumber = Read-Host "Въведете номер на инстанцията"
+        $folderName = "ComfyUI_GPU$instanceNumber"
+        $fullPath = Join-Path -Path $PSScriptRoot -ChildPath $folderName
+        if (Test-Path $fullPath) {
+            Write-Warning "Папката '$folderName' вече съществува. Моля, изберете друг номер."
+            return Get-InstanceNumber
+        }
+        return $fullPath
+    }
+}
+
 
 # Функция за създаване на символични връзки (symbolic links) между папки
 # Позволява споделяне на модели, custom nodes и workflows между инстанциите
@@ -671,7 +689,7 @@ if ($installMode.ToUpper() -eq 'A') {
     # Всяка инстанция се конфигурира индивидуално
     Write-Host "`n--- Phase 2: Manual Installation for $instanceCount instance(s) ---"
     for ($i = 0; $i -lt $instanceCount; $i++) {
-        $comfyPath = Get-NextFreeComfyFolder
+        $comfyPath = Get-InstanceNumber
         Write-Host "`n`n========================================================="
         Write-Host "Starting installation for instance $($i+1)/$instanceCount in '$comfyPath'"
         Write-Host "========================================================="
