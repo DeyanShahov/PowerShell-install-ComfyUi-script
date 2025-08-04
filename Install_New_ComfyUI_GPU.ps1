@@ -20,19 +20,30 @@ function Get-NextFreeComfyFolder {
 
 # Функция за получаване на номер на инстанция
 function Get-InstanceNumber {
-    $choice = Read-Host "Автоматично засичане на номера на инстанцията? (Y/N)"
-    if ($choice -eq 'Y' -or $choice -eq 'y') {
-        return Get-NextFreeComfyFolder
-    }
-    else {
-        $instanceNumber = Read-Host "Въведете номер на инстанцията"
-        $folderName = "ComfyUI_GPU$instanceNumber"
-        $fullPath = Join-Path -Path $PSScriptRoot -ChildPath $folderName
-        if (Test-Path $fullPath) {
-            Write-Warning "Папката '$folderName' вече съществува. Моля, изберете друг номер."
-            return Get-InstanceNumber
+    while ($true) {
+        $choice = Read-Host "Автоматично засичане на номера на инстанцията? (Y/N)"
+        if ($choice.ToUpper() -eq 'Y') {
+            $folderPath = Get-NextFreeComfyFolder
+            Write-Host "Автоматично избран номер: $($folderPath | Split-Path -Leaf)" -ForegroundColor Green
+            return $folderPath
         }
-        return $fullPath
+        if ($choice.ToUpper() -eq 'N') {
+            while ($true) {
+                $instanceNumber = Read-Host "Въведете номер на инстанцията"
+                if ($instanceNumber -notmatch '^\d+$') {
+                    Write-Warning "Моля, въведете валиден положителен номер."
+                    continue
+                }
+                $folderName = "ComfyUI_GPU$instanceNumber"
+                $fullPath = Join-Path -Path $PSScriptRoot -ChildPath $folderName
+                if (Test-Path $fullPath) {
+                    Write-Warning "Папката '$folderName' вече съществува. Моля, изберете друг номер."
+                    continue
+                }
+                return $fullPath
+            }
+        }
+        Write-Warning "Невалиден избор. Моля, въведете 'Y' или 'N'."
     }
 }
 
