@@ -176,7 +176,7 @@ function Invoke-ModelDownloader {
     $modelPacks = @(
         [PSCustomObject]@{
             WorkflowName = "2-in-1 Clothes Swapper Workflow"
-           Models = @(
+            Models = @(
                 [PSCustomObject]@{
                     Name = "T5-XXL FP8 Text Encoder"
                     URL = "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
@@ -221,9 +221,7 @@ function Invoke-ModelDownloader {
                 },
                 [PSCustomObject]@{
                     Name = "F_1D_Detailed Skin&Textures"
-                    #URL = "https://civitai.com/api/download/models/1770362?type=Model&format=SafeTensor"
                     URL = "https://huggingface.co/TheImposterImposters/RealisticSkinTexturestyleXLDetailedSkinSD1.5Flux1D-SkintextureF1Dv1.5/resolve/main/detailed%20photorealism%20style%20v3.safetensors"
-                    #Size = "1.14 GB"
                     Size = "1.14 GB"
                     Destination = "loras"
                     FileName = "F_1D_Detailed Skin&Textures_(dsv4).safetensors"
@@ -236,11 +234,11 @@ function Invoke-ModelDownloader {
                     FileName = "F_1D_Migration_Lora_cloth_(cloth-on).safetensors"
                 },
                 [PSCustomObject]@{
-                    Name = "4x-Ultrasharp"
+                    Name = "4x-UltraSharp.pth"
                     URL = "https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth"
                     Size = "67 MB"
                     Destination = "upscale_models"
-                    FileName = "4x-Ultrasharp.pth"
+                    FileName = "4x-UltraSharp.pth"
                 },   
                 [PSCustomObject]@{
                     Name = "ae.sft"
@@ -248,7 +246,7 @@ function Invoke-ModelDownloader {
                     Size = "335 MB"
                     Destination = "vae"
                     FileName = "ae.sft"
-                }                                     
+                }                                               
                 # Add other models for this workflow here in the future
             )
         }

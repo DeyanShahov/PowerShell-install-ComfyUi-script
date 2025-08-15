@@ -43,7 +43,7 @@ cd /d "%instancePath%"
 
 REM Set CUDA device and port
 set "CUDA_VISIBLE_DEVICES=%instance%"
-set /a port=8180 + %instance%
+set /a port=8188 + %instance%
 
 REM Activate virtual environment
 call venv\Scripts\activate.bat
